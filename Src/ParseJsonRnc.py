@@ -24,6 +24,7 @@ traceParse=False
 ### reserved words
 RESERVED={"integer":"INTEGER","number":"NUMBER","string":"STRING",
           "null":"NULL","boolean":"BOOLEAN","start":"START"}
+LETTRES = "A-Za-zèêéàâçîôùïëüÈÊÉÀÂÇÎÔÙÏËÜ"  # lettres et lettres accentuées
 
 def tokenizeRNC(input):
     token_specification = [
@@ -31,7 +32,7 @@ def tokenizeRNC(input):
         ("STR",           r'"(?:\\.|[^"\\])*?"'+"|"+ r"'(?:\\.|[^'\\])*?'"),# double or single quoted string
         ("REGEX",         r"/.*?/"),                    # regex
         ("NUMBER",        r'-?\d+(\.\d*)?'),              # integer or decimal number
-        ("IDENT",         r'[A-Za-z_][-A-Za-z_0-9]*'),   # Identifiers
+        ("IDENT",         f'[{LETTRES}_][-{LETTRES}_0-9]*'),   # Identifiers
         ("INTERROGATION", r'\?'),
         ("OPEN_BRACE",    r'\{'),
         ("CLOSE_BRACE",   r'\}'),
